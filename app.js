@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const { urlencoded, json } = require('express');
+app.use(express.json())
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const { initDB } = require('./mongoDB.js');
