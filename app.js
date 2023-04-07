@@ -4,6 +4,8 @@ const { urlencoded, json } = require('express');
 app.use(express.json())
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const cors=require('cors')
+app.use(cors())
 const { initDB } = require('./mongoDB.js');
 const { login, signup, logout } = require('./controller/user');
 const {
