@@ -30,7 +30,7 @@ app.post('/signup', signup);
 app.post('/login', login);
 app.post('/logout', logout);
 
-// Set up routes for blog management
+// Set up routes for blog management 
 app.get('/', getallblog);
 app.post('/add', addblog); 
 app.put('/update/:id', updateblog);
