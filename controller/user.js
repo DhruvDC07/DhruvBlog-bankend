@@ -7,6 +7,8 @@ const signup = async (req, res) => {
     if (!name || !email || !password) {
       return res.status(400).json({ error: 'All fields are required!' });
     }
+
+    //test 
     
     let existingUser;
     try {

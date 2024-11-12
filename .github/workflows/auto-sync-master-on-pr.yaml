@@ -4,14 +4,16 @@ on:
   pull_request:
     branches:
       - master
+    types: [opened, synchronize, reopened]
 
 jobs:
   sync_master:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout PR Branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Fetch Master Branch
         run: git fetch origin master
@@ -19,7 +21,6 @@ jobs:
       - name: Check if PR Branch is Up-to-Date with Master
         id: check_diff
         run: |
-          git checkout ${{ github.event.pull_request.head.ref }}
           git merge --no-commit --no-ff origin/master || echo "needs_sync=true" >> $GITHUB_ENV
 
       - name: Sync PR Branch with Master
