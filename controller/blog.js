@@ -48,7 +48,7 @@ let addblog = async(req,res)=>{
 
 
 //test synchronization
-//';lkjhgvfc hello world
+//';lkjhgvfc hello worldghjkl;
 let updateblog = async(req,res)=>{
     const { title, description } = req.body;
     const blogId = req.params.id;
