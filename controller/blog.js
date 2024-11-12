@@ -19,6 +19,7 @@ let addblog = async(req,res)=>{
     const { title, description, user } = req.body;
 
     let existingUser;
+    
     try {
       existingUser = await userModel.findById(user);
     } catch (err) {
