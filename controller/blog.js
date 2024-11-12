@@ -13,7 +13,7 @@ let getallblog = async (req, res) => {
     return res.status(500).json({ message: "Server Error" });
   }
 };
-// test 2 without syncy
+// test 2 without syncy 2
 
 let addblog = async(req,res)=>{
     const { title, description, user } = req.body;
