@@ -19,15 +19,18 @@ jobs:
       - name: Fetch Master Branch
         run: git fetch origin master
 
-      - name: Check if PR Branch is Up-to-Date with Master
-        id: check_diff
-        run: |
-          git merge --no-commit --no-ff --allow-unrelated-histories origin/master || echo "needs_sync=true" >> $GITHUB_ENV
-
       - name: Sync PR Branch with Master
         if: env.needs_sync == 'true'
         run: |
+          git config --local user.email "github-actions[bot]@(link unavailable)"
+          git config --local user.name "github-actions[bot]"
+          git merge --no-commit --no-ff --allow-unrelated-histories origin/master || echo "needs_sync=true" >> $GITHUB_ENV
           git merge origin/master
           git push origin ${{ github.event.pull_request.head.ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if PR Branch is Up-to-Date with Master
+        id: check_diff
+        run: |
+          git merge --no-commit --no-ff --allow-unrelated-histories origin/master || echo "needs_sync=true" >> $GITHUB_ENV
