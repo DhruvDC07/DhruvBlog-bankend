@@ -44,6 +44,9 @@ let addblog = async(req,res)=>{
     }
 };
 
+
+
+
 //test synchronization
 
 let updateblog = async(req,res)=>{
