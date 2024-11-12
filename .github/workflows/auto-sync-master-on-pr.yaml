@@ -1,0 +1,31 @@
+name: Auto-Sync PR Branch with Master
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  sync_master:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@v2
+
+      - name: Fetch Master Branch
+        run: git fetch origin master
+
+      - name: Check if PR Branch is Up-to-Date with Master
+        id: check_diff
+        run: |
+          git checkout ${{ github.event.pull_request.head.ref }}
+          git merge --no-commit --no-ff origin/master || echo "needs_sync=true" >> $GITHUB_ENV
+
+      - name: Sync PR Branch with Master
+        if: env.needs_sync == 'true'
+        run: |
+          git merge origin/master
+          git push origin ${{ github.event.pull_request.head.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
