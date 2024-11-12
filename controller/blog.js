@@ -13,12 +13,13 @@ let getallblog = async (req, res) => {
     return res.status(500).json({ message: "Server Error" });
   }
 };
-
+ // test 1 
 
 let addblog = async(req,res)=>{
     const { title, description, user } = req.body;
 
     let existingUser;
+    
     try {
       existingUser = await userModel.findById(user);
     } catch (err) {
