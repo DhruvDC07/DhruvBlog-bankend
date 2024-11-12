@@ -8,7 +8,7 @@ const signup = async (req, res) => {
       return res.status(400).json({ error: 'All fields are required!' });
     }
 
-    //test how its going   kjhuygtfc ,lkjhgfd sxdcfvgbhjmk
+    //test how its going   kjhuygtfc ,lkjhgfd sxdcfvgbhjmkndfghj
     
     let existingUser;
     try {
