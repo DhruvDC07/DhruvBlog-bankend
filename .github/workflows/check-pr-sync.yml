@@ -1,0 +1,29 @@
+name: Check PR Sync with Master
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v2
+        with:
+          ref: master
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Check if PR branch is in sync with master
+        run: |
+          git fetch origin master
+          git checkout ${{ github.event.pull_request.head.ref }}
+          if ! git merge-base --is-ancestor origin/master HEAD; then
+            echo "PR branch is not in sync with master"
+            exit 1
+          fi
